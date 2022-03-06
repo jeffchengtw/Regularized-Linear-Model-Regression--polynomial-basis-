@@ -36,7 +36,7 @@ class LSE():
         n = X.shape[1]
         print('\nLSE:')
         print('Fitting line: %s'%self.fitting_line(n))
-        print('Total error: %f'%self.y_pred)
+        print('Total error: %f'%self.compute_loss(y))
 
     def plot_res(self, X, y):
         x = np.array(X[:, -2])
