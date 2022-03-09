@@ -3,11 +3,11 @@ import math
 
 def getMinorIndex(matrixLocal, x, y):
   minor = []
-  for i in range(matrixLocal.shape[0]):
+  for i in range(len(matrixLocal)):
     minorRow = []
     if i == x:
       continue
-    for j in range(matrixLocal.shape[0]):
+    for j in range(len(matrixLocal)):
       if j == y:
         continue
       minorRow.append(matrixLocal[i][j])
@@ -30,9 +30,9 @@ def getDeterminant(matrixLocal):
 
 def getCofactorMatrix(matrixLocal):
   cofactorMatrix = []
-  for i in range(matrixLocal.shape[0]):
+  for i in range(len(matrixLocal)):
     row = []
-    for j in range(matrixLocal.shape[1]):
+    for j in range(len(matrixLocal)):
       e = matrixLocal[i][j]
       t = getDeterminant2By2(getMinorIndex(matrixLocal, i, j))
       row.append(t * math.pow(-1, i + j))
@@ -41,9 +41,9 @@ def getCofactorMatrix(matrixLocal):
 
 def transpose(matrixLocal):
   transposeMatrix = []
-  for i in range(matrixLocal.shape[0]):
+  for i in range(len(matrixLocal)):
     row = []
-    for j in range(matrixLocal.shape[1]):
+    for j in range(len(matrixLocal)):
       e = matrixLocal[j][i]
       row.append(e)
     transposeMatrix.append(row)
@@ -51,9 +51,9 @@ def transpose(matrixLocal):
 
 def divideMatrix(matrixLocal, divisor):
   ansMatrix = []
-  for i in range(matrixLocal.shape[0]):
+  for i in range(len(matrixLocal)):
     row = []
-    for j in range(matrixLocal.shape[1]):
+    for j in range(len(matrixLocal)):
       e = matrixLocal[i][j]/divisor
       row.append(e)
     ansMatrix.append(row)
