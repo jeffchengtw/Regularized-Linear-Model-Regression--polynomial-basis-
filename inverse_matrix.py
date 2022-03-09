@@ -3,11 +3,11 @@ import math
 
 def getMinorIndex(matrixLocal, x, y):
   minor = []
-  for i in range(3):
+  for i in range(matrixLocal.shape[0]):
     minorRow = []
     if i == x:
       continue
-    for j in range(3):
+    for j in range(matrixLocal.shape[0]):
       if j == y:
         continue
       minorRow.append(matrixLocal[i][j])
@@ -20,7 +20,9 @@ def getDeterminant2By2(matrixLocal):
 
 def getDeterminant(matrixLocal):
   determinant = 0
-  for x in range(3):
+  if matrixLocal.shape[0] == 2:
+    return getDeterminant2By2(matrixLocal)
+  for x in range(matrixLocal.shape[0]):
     t = getDeterminant2By2(getMinorIndex(matrixLocal, 0, x))
     e = matrixLocal[0][x]
     determinant += (t * e * math.pow(-1, x))
@@ -28,9 +30,9 @@ def getDeterminant(matrixLocal):
 
 def getCofactorMatrix(matrixLocal):
   cofactorMatrix = []
-  for i in range(3):
+  for i in range(matrixLocal.shape[0]):
     row = []
-    for j in range(3):
+    for j in range(matrixLocal.shape[1]):
       e = matrixLocal[i][j]
       t = getDeterminant2By2(getMinorIndex(matrixLocal, i, j))
       row.append(t * math.pow(-1, i + j))
@@ -39,9 +41,9 @@ def getCofactorMatrix(matrixLocal):
 
 def transpose(matrixLocal):
   transposeMatrix = []
-  for i in range(3):
+  for i in range(matrixLocal.shape[0]):
     row = []
-    for j in range(3):
+    for j in range(matrixLocal.shape[1]):
       e = matrixLocal[j][i]
       row.append(e)
     transposeMatrix.append(row)
@@ -49,21 +51,27 @@ def transpose(matrixLocal):
 
 def divideMatrix(matrixLocal, divisor):
   ansMatrix = []
-  for i in range(3):
+  for i in range(matrixLocal.shape[0]):
     row = []
-    for j in range(3):
+    for j in range(matrixLocal.shape[1]):
       e = matrixLocal[i][j]/divisor
       row.append(e)
     ansMatrix.append(row)
   return ansMatrix
 
 def inverse(matrix):
-    cofactor = getCofactorMatrix(matrix)
-    adjoint = transpose(cofactor)
-    det = getDeterminant(matrix)
-    ans = divideMatrix(adjoint, det)
-    return ans
-    print('------------------------------------my---------------------------------------')
-    print(matrix)
-    print(ans)
-    print('------------------------------------my---------------------------------------')
+  n = matrix.shape[0]
+  det = getDeterminant(matrix)
+  if n ==2:
+    molecular = np.array([[matrix[1][1], -matrix[0][1]],
+                            [-matrix[1][0], matrix[0][0]]])
+    ans = molecular / det
+  else:
+      cofactor = getCofactorMatrix(matrix)
+      adjoint = transpose(cofactor)
+      ans = divideMatrix(adjoint, det)
+  return ans
+  print('------------------------------------my---------------------------------------')
+  print(matrix)
+  print(ans)
+  print('------------------------------------my---------------------------------------')
