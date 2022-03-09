@@ -1,12 +1,7 @@
-from argparse import ArgumentParser
 import numpy as np
 import matplotlib.pyplot as plt
 from method import LSE, Newton
 from utils import *
-
-
-
-
 
 
 x_data = [1,2,3,5,6,7,8,9,10,12,13,14,15,16,18,19,21,22]
@@ -28,6 +23,3 @@ if(True):
     model.fit(X,y)
     model.predict(X)
     model.visualize(X,y)
-
-    
-    

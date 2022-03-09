@@ -114,4 +114,3 @@ class Newton():
         plt.title('Newton')
         plt.plot(x,y_pred)
         plt.show()
-        
